@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class Cube {
 
-	private String url;
+	private String faceOne;
 	
-	public static Cube fromTextFile(String adresse) {
+	public static Cube fromTextFile(String adresse) throws IOException {
 		Cube cube = new Cube();
-		return cube.setUrl(adresse);
+		return cube.loadFromFile(adresse);
 	}
 
 	public Integer numberOfFaces() {
@@ -19,25 +19,22 @@ public class Cube {
 		return 1;
 	}
 
-	public Object getTitreFace(int i) throws IOException {
-		
+	public Cube loadFromFile(String url) throws IOException{
 		BufferedReader reader = new BufferedReader(new FileReader(new File("templates/one-line.txt")));
-
-		String line = reader.readLine(); 		
+		
+		this.addFace(reader.readLine().substring(2));
 		reader.close();
-		
-		Face face = new Face(line.substring(2));
-		
-		return face.getTitre();
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public Cube setUrl(String url) {
-		this.url = url;
 		return this;
+	}
+
+	public Cube addFace(String string) {
+		this.faceOne=string;
+		return this;
+	}
+	
+	public boolean equals(Object other) {
+		Cube otherCube = (Cube)other;
+		return this.faceOne.equals(otherCube.faceOne);
 	}
 
 }

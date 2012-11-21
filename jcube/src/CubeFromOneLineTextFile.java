@@ -12,18 +12,24 @@ public class CubeFromOneLineTextFile {
 	private Cube cube;
 	
 	@Before
-	public void createCubeFromTextFile(){
+	public void createCubeFromTextFile() throws IOException{
 		this.cube = new Cube();
 		cube = Cube.fromTextFile("templates/one-line.txt");
 	}
-
-	@Test
-	public void cubeShouldHaveOneFace() {
-		assertEquals(new Integer(1) , this.cube.numberOfFaces());
-	}
 	
 	@Test
-	public void titleOfFaceShouldBeHi() throws IOException{
-		assertEquals("Hi", this.cube.getTitreFace(0));
+	public void cubeShouldBeOneFacedWithHi(){
+		Cube expectedCube = (new Cube()).addFace("Hi");
+		
+		assertEquals(expectedCube, cube);
+	}
+	
+	
+	public void cubeShouldBeOneFaceWithCommentSortirDuCoursPlusTot() throws IOException {
+		Cube expectedCube = (new Cube())
+				.addFace("Comment sortir du cours plus t™t");
+
+		Cube actualCube = Cube.fromTextFile("templates/one-line-cube.txt");		
+		assertEquals(expectedCube, actualCube);
 	}
 }
