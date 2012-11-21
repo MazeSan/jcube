@@ -10,14 +10,14 @@ public class CubeFromOneLineTextFile {
 	
 	@Before
 	public void creerClasse(){
-		this.cube = new Cube();
+		//this.cube = new Cube();
 	}
 
 	@Test
-	public void siFichierVideRetourneFalse() {
-		Cube.fromTextFile("templates/git-cheat.txt");
+	public void cubeShouldHaveOneFace() {
+		cube = Cube.fromTextFile("templates/git-cheat.txt");
 		assertEquals(new Integer(1) , cube.numberOfFaces());
 	}
-
+	
 	
 }
